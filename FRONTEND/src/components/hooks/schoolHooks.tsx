@@ -2,8 +2,10 @@ import { jwtDecode } from "jwt-decode";
 import { useSelector } from "react-redux";
 import useSwr from "swr";
 import {
+  findoneStudents,
   readClass,
   viewOne,
+  viewStudents,
   viewallannounce,
   viewasession,
 } from "../../api/Authapi";
@@ -44,7 +46,7 @@ export const sessionHook = () => {
   const schoolID = useSelector((state: any) => state.user);
   const Idd: any = jwtDecode(schoolID);
   console.log(Idd);
-  const { data } = useSwr(
+  const { data, isLoading } = useSwr(
     `api/view-one-session/${Idd.id}`,
     () => {
       return viewasession(Idd.id).then((res: any) => {
@@ -53,7 +55,7 @@ export const sessionHook = () => {
     },
     { refreshInterval: 4000 }
   );
-  return { data };
+  return { data, isLoading };
 };
 
 export const classHook = () => {
@@ -68,6 +70,34 @@ export const classHook = () => {
       });
     },
     { refreshInterval: 4000 }
+  );
+  return { data };
+};
+
+export const studentHook = () => {
+  const schoolID = useSelector((state: any) => state.user);
+  const Idd: any = jwtDecode(schoolID);
+
+  const { data } = useSwr(
+    `api/view-all-student/${Idd.id}`,
+    () => {
+      return viewStudents(Idd.id).then((res: any) => {
+        return res.data;
+      });
+    },
+    { refreshInterval: 1000 }
+  );
+  return { data };
+};
+export const findostudentHook = (ID: any) => {
+  const { data } = useSwr(
+    `api/view-all-student/`,
+    () => {
+      return findoneStudents(ID).then((res: any) => {
+        return res.data;
+      });
+    }
+    // { refreshInterval: 1000 }
   );
   return { data };
 };

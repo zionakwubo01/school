@@ -127,3 +127,57 @@ export const readClass = async (schoolID: any) => {
     return error;
   }
 };
+export const deleteClass = async (classID: any) => {
+  try {
+    return await axios.delete(`${url}/delete-class/${classID}`).then((res) => {
+      return res.data;
+    });
+  } catch (error) {
+    return error;
+  }
+};
+export const deletestudent = async (studentID: any) => {
+  try {
+    return await axios
+      .delete(`${url}/delete-student/${studentID}`)
+      .then((res) => {
+        return res.data;
+      });
+  } catch (error) {
+    return error;
+  }
+};
+export const createStudent = async (schoolID: any, data: any) => {
+  try {
+    return await axios
+      .post(`${url}/create-student/${schoolID}`, data)
+      .then((res) => {
+        return res.data;
+      });
+  } catch (error) {
+    return error;
+  }
+};
+export const viewStudents = async (schoolID: any) => {
+  try {
+    return await axios
+      .get(`${url}/view-all-student/${schoolID}`)
+      .then((res) => {
+        return res.data;
+      });
+  } catch (error) {
+    return error;
+  }
+};
+export const findoneStudents = async (studentID: any) => {
+  try {
+    return await axios
+      .get(`${url}/find-one-student/${studentID}`)
+      .then((res) => {
+        console.log("from api", res);
+        return res.data;
+      });
+  } catch (error) {
+    return error;
+  }
+};

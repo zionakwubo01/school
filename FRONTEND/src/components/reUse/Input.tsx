@@ -39,7 +39,7 @@ const Input: FC<iInputProps> = ({
         className
       )}
       style={{
-        border: `${value ? "1px solid rgb(117, 10, 6)" : ""}`,
+        border: `${value ? "1px solid rgb(58, 0, 192)" : ""}`,
       }}
       onClick={() => {
         setState(true);

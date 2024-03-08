@@ -82,3 +82,20 @@ export const viewSchoolClasses = async (req: Request, res: Response) => {
     });
   }
 };
+export const deleteClass = async (req: Request, res: Response) => {
+  try {
+    const { classID } = req.params;
+
+    const classs = await classModel.findByIdAndDelete(classID);
+    return res.status(HTTP.OK).json({
+      message: "class deletd",
+      data: classs,
+      status: 201,
+    });
+  } catch (error) {
+    return res.status(HTTP.BAD_REQUEST).json({
+      message: "error viewing schools",
+      status: 404,
+    });
+  }
+};

@@ -9,6 +9,7 @@ import Dashhome from "../components/Dashboard/Dashhome";
 import Student from "../pages/Viewingstudent/Student";
 import Profile from "../pages/profile/Profile";
 import Class from "../components/Dashboard/class/Class";
+import Detailpage from "../components/student/Detailpage";
 
 export const mainrouter = createBrowserRouter([
   {
@@ -53,6 +54,10 @@ export const mainrouter = createBrowserRouter([
       {
         path: "/class",
         element: <Class />,
+      },
+      {
+        path: "/detail/:studentID",
+        element: <Detailpage />,
       },
     ],
   },

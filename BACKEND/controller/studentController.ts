@@ -9,8 +9,13 @@ export const createStudent = async (req: Request, res: Response) => {
   try {
     const { schoolID } = req.params;
 
-    const { studentFirstname, studentLastname, studentAddress, classAssigned } =
-      req.body;
+    const {
+      studentFirstname,
+      studentLastname,
+      studentAddress,
+      classAssigned,
+      gender,
+    } = req.body;
     const enrollmentID = crypto.randomBytes(2).toString("hex");
 
     const password = `${studentFirstname
@@ -29,6 +34,7 @@ export const createStudent = async (req: Request, res: Response) => {
         const student = await studentsModel.create({
           studentFirstname,
           studentLastname,
+          gender,
           schoolID: school.enrollmentID,
           studentAddress,
           classAssigned,
@@ -82,6 +88,42 @@ export const ViewallStudents = async (req: Request, res: Response) => {
   } catch {
     return res.status(HTTP.BAD_REQUEST).json({
       message: "error reading students",
+      status: 404,
+    });
+  }
+};
+
+export const deleteStudent = async (req: Request, res: Response) => {
+  try {
+    const { studentID } = req.params;
+
+    const students = await studentsModel.findByIdAndDelete(studentID);
+    return res.status(HTTP.OK).json({
+      message: "students deletd",
+      data: students,
+      status: 201,
+    });
+  } catch (error) {
+    return res.status(HTTP.BAD_REQUEST).json({
+      message: "error viewing schools",
+      status: 404,
+    });
+  }
+};
+export const findoneStudent = async (req: Request, res: Response) => {
+  try {
+    const { studentID } = req.params;
+
+    const student = await studentsModel.findById(studentID);
+    return res.status(HTTP.OK).json({
+      message: "students found",
+      data: student,
+      status: 201,
+    });
+  } catch (error: any) {
+    return res.status(HTTP.BAD_REQUEST).json({
+      message: "error viewing schools",
+      data: error.message,
       status: 404,
     });
   }

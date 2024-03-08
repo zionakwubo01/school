@@ -186,5 +186,3 @@ export const updateSchooladdress = async (req: Request, res: Response) => {
     });
   }
 };
-
-//updating profile picture and avatar

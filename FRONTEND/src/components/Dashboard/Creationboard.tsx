@@ -4,6 +4,7 @@ import {
   chengeToggle,
   chengeToggle2,
   chengeToggle3,
+  chengeToggle4,
 } from "../global/Reduxstate";
 
 const Creationboard = () => {
@@ -35,7 +36,12 @@ const Creationboard = () => {
           >
             push announcement
           </button>
-          <button className="p-3 bg-black w-[50%] rounded-xl  text-white font-bold">
+          <button
+            onClick={() => {
+              dispatch(chengeToggle4(true));
+            }}
+            className="p-3 bg-black w-[50%] rounded-xl  text-white font-bold"
+          >
             Add student
           </button>
           <button className="p-3 bg-red-900 w-[50%] rounded-xl text-white font-bold">

@@ -12,6 +12,7 @@ interface iStudent {
   email: string;
   phone: string;
   school: {};
+  gender: string;
 }
 
 interface iStudentdata extends iStudent, Document {}
@@ -32,6 +33,7 @@ const studentModel = new Schema<iStudentdata>(
       type: Types.ObjectId,
       ref: "schools",
     },
+    gender: { type: String },
   },
 
   { timestamps: true }

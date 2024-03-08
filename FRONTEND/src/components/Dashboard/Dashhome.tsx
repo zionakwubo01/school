@@ -6,15 +6,17 @@ import { useSelector } from "react-redux";
 import Eventboard from "./Eventboard";
 import { schoolHook, sessionHook } from "../hooks/schoolHooks";
 import Createclass from "./class/Createclass";
+import Studentshow from "../student/Studentshow";
 
 const Dashhome = () => {
   const togg = useSelector((state: any) => state.toggle);
   const togg2 = useSelector((state: any) => state.toggle2);
   const togg3 = useSelector((state: any) => state.toggle3);
+  const togg4 = useSelector((state: any) => state.toggle4);
 
-  const { data }: any = sessionHook();
+  const { data, isLoadind }: any = sessionHook();
 
-  const year = data?.session[0].year;
+  const year = data?.session[0]?.year;
   // console.log("school", data.students.length);
 
   return (
@@ -101,6 +103,7 @@ const Dashhome = () => {
 
       {togg2 ? <Eventboard /> : ""}
       <div>{togg3 ? <Createclass /> : ""}</div>
+      <div>{togg4 ? <Studentshow /> : ""}</div>
     </div>
   );
 };
